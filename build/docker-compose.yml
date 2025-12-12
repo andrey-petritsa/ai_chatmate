@@ -1,0 +1,32 @@
+x-common-service: &common-service
+  env_file:
+    - ../settings/.env
+  volumes:
+    - ../output:/app/output
+    - ../settings:/app/settings:ro
+  restart: unless-stopped
+  environment:
+    - PYTHONPATH=/app/chatmate_src
+  build:
+    context: ..
+    dockerfile: build/Dockerfile
+
+services:
+  chatmate-autolike:
+    <<: *common-service
+    container_name: chatmate-autolike
+    image: chatmate-daivinchik:latest
+    command: ["-m", "chatmate_src.chatmate_details.main.davinchik.daivinchik_auto_like_main"]
+
+  chatmate-vote-talk:
+    <<: *common-service
+    container_name: chatmate-vote-talk
+    image: chatmate-daivinchik:latest
+    command: ["-m", "chatmate_src.chatmate_details.main.davinchik.davinchik_vote_talk_main"]
+
+  chatmate-tests:
+    <<: *common-service
+    container_name: chatmate-tests
+    image: chatmate-daivinchik:latest
+    entrypoint: ["/bin/bash", "-c"]
+    command: ["bin/run_tests.sh"]

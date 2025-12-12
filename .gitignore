@@ -17,8 +17,9 @@ env/
 .idea
 
 # Python packaging
+settings/
+output/
 .Python
-build/
 dist/
 *.egg-info/
 .eggs/
@@ -67,5 +68,5 @@ Desktop.ini
 *.dockerfile
 docker-compose.override.yml
 
-test/tests/vk_date_platform/settings.py
+chatmate_test/tests/vk_date_platform/settings.py
 test-chats/
